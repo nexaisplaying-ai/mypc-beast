@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyPC Beast | Unleash the Specs</title>
+    <meta name="description" content="High-performance laptop reviews and specs database.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Config for Brand Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        deepBlack: '#0b0b0b',
+                        surface: '#121212',
+                        surfaceHighlight: '#1a1a1a',
+                        deepGold: '#b8860b',
+                        brightGold: '#d4af37',
+                        textMain: '#e5e5e5',
+                        textMuted: '#a3a3a3',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    boxShadow: {
+                        'gold-glow': '0 0 20px -5px rgba(184, 134, 11, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Utilities */
+        body {
+            background-color: #0b0b0b;
+            color: #e5e5e5;
+        }
+        
+        .gold-gradient-text {
+            background: linear-gradient(to right, #b8860b, #eec04b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .search-glow {
+            box-shadow: 0 0 40px -10px rgba(184, 134, 11, 0.15);
+        }
+
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+
+        /* Scrollbar customization */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0b0b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b8860b;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-deepGold selection:text-black">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 bg-deepBlack/90 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 border border-deepGold rounded bg-black flex items-center justify-center relative overflow-hidden group-hover:shadow-gold-glow transition-all duration-300">
+                    <div class="absolute inset-0 bg-deepGold/10"></div>
+                    <svg class="w-6 h-6 text-deepGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-bold leading-none tracking-tight">MyPC <span class="text-deepGold">Beast</span></span>
+                    <span class="text-[10px] text-gray-500 uppercase tracking-widest font-mono mt-1">Hardware Tamed</span>
+                </div>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
+                <a href="#laptops" class="hover:text-deepGold transition-colors">Laptops</a>
+                <a href="#components" class="hover:text-deepGold transition-colors">Components</a>
+                <a href="#reviews" class="hover:text-deepGold transition-colors">Deep Reviews</a>
+                <a href="#compare" class="hover:text-deepGold transition-colors">Compare</a>
+            </div>
+
+            <!-- CTA -->
+            <div class="hidden md:block">
+                <a href="#" class="px-5 py-2.5 bg-surfaceHighlight border border-white/10 rounded hover:border-deepGold hover:text-deepGold transition-all duration-300 text-sm font-semibold">
+                    Sign In
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-gray-300 hover:text-white" onclick="alert('Mobile menu would open here.')">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-6 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
+            <div class="absolute top-20 left-20 w-72 h-72 bg-deepGold/5 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-20 w-96 h-96 bg-purple-900/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-block mb-4 px-3 py-1 rounded-full border border-deepGold/30 bg-deepGold/5 text-deepGold text-xs font-mono font-semibold tracking-wide">
+                V 1.0 BETA LIVE
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight mb-6 leading-tight text-white">
+                UNLEASH THE <br>
+                <span class="gold-gradient-text">SPECS</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-textMuted max-w-2xl mx-auto mb-12 font-light">
+                Real benchmarks. Raw performance data. No fluff. 
+                Find the machine that crushes your workflow.
+            </p>
+
+            <!-- Search Interface -->
+            <div class="relative max-w-2xl mx-auto group">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-deepGold to-yellow-800 rounded-lg blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
+                <div class="relative flex items-center bg-[#0f0f0f] rounded-lg border border-white/10 p-2 shadow-2xl">
+                    <div class="pl-4 text-gray-500">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <input type="text" 
+                        class="w-full bg-transparent border-none text-white px-4 py-3 focus:ring-0 focus:outline-none placeholder-gray-600 text-lg"
+                        placeholder="Try 'RTX 4090', 'MacBook Pro', or 'Budget Gaming'..."
+                    >
+                    <button class="bg-deepGold hover:bg-brightGold text-black font-bold px-6 py-3 rounded transition-colors whitespace-nowrap">
+                        Search Specs
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quick Filter Tags -->
+            <div class="mt-8 flex flex-wrap justify-center gap-3">
+                <span class="text-sm text-gray-500 mr-2">Trending:</span>
+                <button class="px-3 py-1 bg-surfaceHighlight border border-white/5 rounded-full text-xs text-gray-400 hover:text-deepGold hover:border-deepGold transition-colors">Gaming Laptops</button>
+                <button class="px-3 py-1 bg-surfaceHighlight border border-white/5 rounded-full text-xs text-gray-400 hover:text-deepGold hover:border-deepGold transition-colors">Creator Workstations</button>
+                <button class="px-3 py-1 bg-surfaceHighlight border border-white/5 rounded-full text-xs text-gray-400 hover:text-deepGold hover:border-deepGold transition-colors">Under $1000</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Categories Grid -->
+    <section class="py-16 bg-surface border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-2xl font-bold mb-8 flex items-center gap-2">
+                <span class="w-1 h-6 bg-deepGold rounded-full"></span>
+                Browse by Category
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <a href="#" class="group relative overflow-hidden rounded-xl bg-deepBlack border border-white/10 hover:border-deepGold/50 transition-all duration-300 h-64 flex flex-col justify-end p-6">
+                    <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&q=80&w=800" alt="Gaming" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-20 transition-opacity duration-500 grayscale group-hover:grayscale-0">
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-bold text-white mb-1">Gaming Beasts</h3>
+                        <p class="text-sm text-gray-400">High refresh rates & thermal mastery.</p>
+                    </div>
+                </a>
+                
+                <!-- Card 2 -->
+                <a href="#" class="group relative overflow-hidden rounded-xl bg-deepBlack border border-white/10 hover:border-deepGold/50 transition-all duration-300 h-64 flex flex-col justify-end p-6">
+                    <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&q=80&w=800" alt="Workstation" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-20 transition-opacity duration-500 grayscale group-hover:grayscale-0">
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-bold text-white mb-1">Creator Studios</h3>
+                        <p class="text-sm text-gray-400">Color accuracy & rendering power.</p>
+                    </div>
+                </a>
+
+                <!-- Card 3 -->
+                <a href="#" class="group relative overflow-hidden rounded-xl bg-deepBlack border border-white/10 hover:border-deepGold/50 transition-all duration-300 h-64 flex flex-col justify-end p-6">
+                    <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&q=80&w=800" alt="Components" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-20 transition-opacity duration-500 grayscale group-hover:grayscale-0">
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-bold text-white mb-1">Components</h3>
+                        <p class="text-sm text-gray-400">GPUs, CPUs & Motherboards.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="py-20 max-w-7xl mx-auto px-6" id="laptops">
+        <div class="flex items-end justify-between mb-10">
+            <div>
+                <h2 class="text-3xl font-bold text-white mb-2">Top Rated Beasts</h2>
+                <p class="text-gray-400">Latest benchmarks and expert reviews.</p>
+            </div>
+            <a href="#" class="text-deepGold text-sm font-semibold hover:text-white transition-colors">View All Reviews &rarr;</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Product Card 1 -->
+            <div class="bg-surfaceHighlight border border-white/5 rounded-xl overflow-hidden hover:border-deepGold/30 transition-all duration-300 group flex flex-col">
+                <div class="h-48 bg-black relative p-6 flex items-center justify-center">
+                    <span class="absolute top-4 left-4 bg-deepGold text-black text-xs font-bold px-2 py-1 rounded">EDITOR'S CHOICE</span>
+                    <!-- Placeholder for Product Image -->
+                    <div class="w-full h-full flex items-center justify-center text-gray-700">
+                         <svg class="w-24 h-24 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-white leading-tight group-hover:text-deepGold transition-colors">Alienware x16 R2</h3>
+                        <span class="text-deepGold font-mono font-bold">$2,899</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-4 line-clamp-2">The absolute pinnacle of gaming performance with advanced cryo-tech cooling.</p>
+                    
+                    <!-- Specs Mini Table -->
+                    <div class="bg-black/50 rounded p-3 mb-4 border border-white/5">
+                        <div class="grid grid-cols-2 gap-y-2 text-xs font-mono">
+                            <div class="text-gray-500">CPU</div>
+                            <div class="text-right text-gray-300">i9-13900HK</div>
+                            <div class="text-gray-500">GPU</div>
+                            <div class="text-right text-gray-300">RTX 4090</div>
+                            <div class="text-gray-500">RAM</div>
+                            <div class="text-right text-gray-300">32GB DDR5</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-auto flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-1">
+                            <div class="w-8 h-8 rounded-full bg-green-900/30 text-green-500 flex items-center justify-center text-xs font-bold border border-green-500/20">98</div>
+                            <span class="text-[10px] text-gray-500 uppercase">Beast Score</span>
+                        </div>
+                        <button class="bg-white text-black text-xs font-bold px-4 py-2 rounded hover:bg-gray-200 transition-colors">
+                            Read Review
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 2 -->
+            <div class="bg-surfaceHighlight border border-white/5 rounded-xl overflow-hidden hover:border-deepGold/30 transition-all duration-300 group flex flex-col">
+                <div class="h-48 bg-black relative p-6 flex items-center justify-center">
+                    <!-- Placeholder for Product Image -->
+                    <div class="w-full h-full flex items-center justify-center text-gray-700">
+                         <svg class="w-24 h-24 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-white leading-tight group-hover:text-deepGold transition-colors">MacBook Pro 16"</h3>
+                        <span class="text-deepGold font-mono font-bold">$3,499</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-4 line-clamp-2">Unmatched battery life and sustained performance for creative pros.</p>
+                    
+                    <div class="bg-black/50 rounded p-3 mb-4 border border-white/5">
+                        <div class="grid grid-cols-2 gap-y-2 text-xs font-mono">
+                            <div class="text-gray-500">Chip</div>
+                            <div class="text-right text-gray-300">M3 Max</div>
+                            <div class="text-gray-500">Screen</div>
+                            <div class="text-right text-gray-300">Liquid Retina</div>
+                            <div class="text-gray-500">Battery</div>
+                            <div class="text-right text-gray-300">22 Hours</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-auto flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-1">
+                            <div class="w-8 h-8 rounded-full bg-blue-900/30 text-blue-400 flex items-center justify-center text-xs font-bold border border-blue-400/20">96</div>
+                            <span class="text-[10px] text-gray-500 uppercase">Beast Score</span>
+                        </div>
+                        <button class="bg-white text-black text-xs font-bold px-4 py-2 rounded hover:bg-gray-200 transition-colors">
+                            Read Review
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 3 -->
+            <div class="bg-surfaceHighlight border border-white/5 rounded-xl overflow-hidden hover:border-deepGold/30 transition-all duration-300 group flex flex-col">
+                <div class="h-48 bg-black relative p-6 flex items-center justify-center">
+                    <span class="absolute top-4 left-4 bg-gray-800 text-gray-300 text-xs font-bold px-2 py-1 rounded">BEST VALUE</span>
+                    <!-- Placeholder for Product Image -->
+                    <div class="w-full h-full flex items-center justify-center text-gray-700">
+                         <svg class="w-24 h-24 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-white leading-tight group-hover:text-deepGold transition-colors">Lenovo Legion 5i</h3>
+                        <span class="text-deepGold font-mono font-bold">$1,250</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-4 line-clamp-2">The budget king. Punches way above its weight class in 1080p gaming.</p>
+                    
+                    <div class="bg-black/50 rounded p-3 mb-4 border border-white/5">
+                        <div class="grid grid-cols-2 gap-y-2 text-xs font-mono">
+                            <div class="text-gray-500">CPU</div>
+                            <div class="text-right text-gray-300">i7-13700H</div>
+                            <div class="text-gray-500">GPU</div>
+                            <div class="text-right text-gray-300">RTX 4060</div>
+                            <div class="text-gray-500">RAM</div>
+                            <div class="text-right text-gray-300">16GB DDR5</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-auto flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-1">
+                            <div class="w-8 h-8 rounded-full bg-yellow-900/30 text-yellow-500 flex items-center justify-center text-xs font-bold border border-yellow-500/20">89</div>
+                            <span class="text-[10px] text-gray-500 uppercase">Beast Score</span>
+                        </div>
+                        <button class="bg-white text-black text-xs font-bold px-4 py-2 rounded hover:bg-gray-200 transition-colors">
+                            Read Review
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section class="py-20 bg-deepBlack border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+            <div>
+                <div class="w-12 h-12 mx-auto bg-deepGold/10 rounded-lg flex items-center justify-center text-deepGold mb-4">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Data-Driven Rankings</h3>
+                <p class="text-sm text-gray-500">We don't guess. We benchmark CPU, GPU, and thermal limits to give you raw scores.</p>
+            </div>
+            <div>
+                <div class="w-12 h-12 mx-auto bg-deepGold/10 rounded-lg flex items-center justify-center text-deepGold mb-4">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Thermal Analysis</h3>
+                <p class="text-sm text-gray-500">Specs mean nothing if they throttle. We test cooling efficiency under sustained loads.</p>
+            </div>
+            <div>
+                <div class="w-12 h-12 mx-auto bg-deepGold/10 rounded-lg flex items-center justify-center text-deepGold mb-4">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Price History</h3>
+                <p class="text-sm text-gray-500">Our database tracks price drops across major retailers so you buy at the bottom.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#050505] border-t border-white/5 pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <span class="text-xl font-bold tracking-tight">MyPC <span class="text-deepGold">Beast</span></span>
+                <p class="text-xs text-gray-600 mt-2">&copy; 2024 MyPC Beast Inc. All rights reserved.</p>
+            </div>
+            <div class="flex gap-6 text-sm text-gray-500">
+                <a href="#" class="hover:text-deepGold">Privacy Policy</a>
+                <a href="#" class="hover:text-deepGold">Terms of Service</a>
+                <a href="#" class="hover:text-deepGold">Affiliate Disclosure</a>
+            </div>
+            <div class="flex gap-4">
+                <!-- Social Icons -->
+                <a href="#" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-deepGold hover:text-black transition-colors">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                </a>
+                <a href="#" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-deepGold hover:text-black transition-colors">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.072 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

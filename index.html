@@ -34,7 +34,7 @@
     .wrap{max-width:var(--container);margin:0 auto;padding:32px}
 
     /* Header */
-    header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:16px}
     .brand{display:flex;align-items:center;gap:14px}
     .logo{
       width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#121212 0%, #1b1b1b 100%);display:flex;align-items:center;justify-content:center;border:2px solid rgba(212,175,55,0.14);box-shadow:0 6px 20px rgba(0,0,0,0.6) inset;
@@ -44,9 +44,70 @@
     .title .name{font-weight:800;font-size:18px;color:var(--gold)}
     .title .sub{font-size:12px;color:var(--muted);margin-top:2px}
 
-    nav{display:flex;gap:18px;align-items:center}
-    nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:13px}
-    .cta{background:transparent;border:1px solid rgba(212,175,55,0.18);padding:10px 14px;border-radius:10px;color:var(--gold);font-weight:700}
+    /* Nav styles + hover gold animation */
+    nav{display:flex;gap:18px;align-items:center;position:relative}
+    nav .nav-link{
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:600;
+      font-size:13px;
+      position:relative;
+      padding:6px 2px;
+      transition: color .22s ease, transform .18s ease;
+      border-radius:6px;
+    }
+    /* gold underline animation using background-size */
+    nav .nav-link::after{
+      content:'';
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      height:2px;
+      background:var(--gold);
+      transform-origin:left center;
+      transform:scaleX(0);
+      transition:transform .26s cubic-bezier(.2,.9,.3,1);
+      border-radius:2px;
+    }
+    nav .nav-link:hover,
+    nav .nav-link:focus {
+      color:var(--gold);
+      transform:translateY(-2px);
+    }
+    nav .nav-link:hover::after,
+    nav .nav-link:focus::after {
+      transform:scaleX(1);
+    }
+
+    .cta{background:transparent;border:1px solid rgba(212,175,55,0.18);padding:10px 14px;border-radius:10px;color:var(--gold);font-weight:700;cursor:pointer}
+
+    /* Dropdown */
+    .dropdown{position:relative}
+    .dropdown-toggle{display:flex;align-items:center;gap:6px;cursor:pointer}
+    .caret{border-top:6px solid var(--muted);border-left:6px solid transparent;border-right:6px solid transparent;display:inline-block;margin-left:4px;transition:transform .2s ease}
+    .dropdown.open .caret{transform:rotate(180deg);border-top-color:var(--gold)}
+    .dropdown-menu{
+      position:absolute;
+      top:calc(100% + 8px);
+      left:0;
+      min-width:180px;
+      background:linear-gradient(180deg, #0b0b0b, #0a0a0a);
+      border:1px solid rgba(255,255,255,0.03);
+      padding:8px;
+      border-radius:10px;
+      display:none;
+      box-shadow:0 12px 40px rgba(0,0,0,0.6);
+      z-index:50;
+    }
+    .dropdown-menu a{
+      display:block;padding:8px 10px;border-radius:8px;color:var(--muted);text-decoration:none;font-weight:600;font-size:13px;
+    }
+    .dropdown-menu a:hover{color:var(--gold);background:rgba(212,175,55,0.03)}
+    /* show on hover for desktop */
+    .dropdown:hover .dropdown-menu{display:block}
+    /* small-screen: dropdown opens by .open class controlled via JS */
+    .dropdown.open .dropdown-menu{display:block}
 
     /* Hero */
     .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:36px 0}
@@ -59,7 +120,7 @@
     .search-wrap{display:flex;gap:12px}
     .search{flex:1;display:flex;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:10px;border-radius:12px;align-items:center;border:1px solid rgba(255,255,255,0.03)}
     .search input{flex:1;background:transparent;border:0;padding:10px 12px;color:#fff;font-weight:600;outline:none}
-    .search button{background:var(--gold);border:0;padding:10px 14px;border-radius:10px;font-weight:700;color:#0b0b0b}
+    .search button{background:var(--gold);border:0;padding:10px 14px;border-radius:10px;font-weight:700;color:#0b0b0b;cursor:pointer}
 
     /* Stats */
     .stats{display:flex;gap:12px;margin-top:18px}
@@ -70,13 +131,15 @@
     /* Featured Beasts */
     .panel{margin-top:28px;padding:22px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
     .panel h3{margin:0 0 14px}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.1));padding:14px;border-radius:12px;border:1px solid rgba(212,175,55,0.06);display:flex;flex-direction:column;gap:8px}
+    /* use auto-fit for a more flexible grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.1));padding:14px;border-radius:12px;border:1px solid rgba(212,175,55,0.06);display:flex;flex-direction:column;gap:8px;min-height:220px}
     .card .thumb{height:140px;border-radius:8px;background-image:linear-gradient(135deg,#111 0,#0a0a0a 100%);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.03)}
     .card h4{margin:6px 0 0;font-size:16px}
     .specs{display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:13px}
-    .price{margin-top:auto;font-weight:800;color:var(--gold);font-size:18px}
+    .price{margin-top:auto;font-weight:800;color:var(--gold);font-size:16px}
     .badge{display:inline-block;padding:6px 8px;border-radius:8px;background:rgba(212,175,55,0.06);color:var(--gold);font-weight:700;font-size:12px}
+    .card .source{font-size:12px;color:var(--muted);margin-top:8px}
 
     /* Footer */
     footer{margin-top:34px;padding:20px 0;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
@@ -84,13 +147,13 @@
     /* Responsive */
     @media (max-width:1000px){
       .hero{grid-template-columns:1fr}
-      .grid{grid-template-columns:repeat(2,1fr)}
     }
     @media (max-width:640px){
-      .grid{grid-template-columns:1fr}
       header{flex-direction:column;align-items:flex-start;gap:12px}
       .hero-left{padding:18px}
       h1{font-size:28px}
+      nav{flex-wrap:wrap}
+      .dropdown-menu{left:auto;right:0}
     }
 
     /* micro interactions */
@@ -109,12 +172,26 @@
         </div>
       </div>
 
-      <!-- ⭐ UPDATED NAV WITH PRODUCTS LINK ⭐ -->
+      <!-- NAV with gold hover animation and dropdown -->
       <nav>
-        <a href="#featured">Featured</a>
-        <a href="products.html">Products</a> <!-- ⭐ Added here -->
-        <a href="#builds">Builds</a>
-        <a href="#deals">Deals</a>
+        <a class="nav-link" href="#featured">Featured</a>
+
+        <!-- Dropdown for Products -->
+        <div class="dropdown" id="productsDropdown" aria-haspopup="true">
+          <a class="nav-link dropdown-toggle" href="products.html" id="productsToggle" aria-expanded="false">
+            Products
+            <span class="caret" aria-hidden="true"></span>
+          </a>
+          <div class="dropdown-menu" role="menu" aria-labelledby="productsToggle">
+            <a href="products.html" role="menuitem">All Products</a>
+            <a href="products.html#laptops" role="menuitem">Laptops</a>
+            <a href="products.html#desktops" role="menuitem">Desktops</a>
+            <a href="products.html#components" role="menuitem">Components</a>
+          </div>
+        </div>
+
+        <a class="nav-link" href="#builds">Builds</a>
+        <a class="nav-link" href="#deals">Deals</a>
         <button class="cta">Sign In</button>
       </nav>
     </header>
@@ -168,21 +245,15 @@
     <section id="featured" class="panel">
       <h3>Featured Beasts</h3>
       <div class="grid" id="productGrid">
-        <!-- Card 1 -->
+
+        <!-- Existing beasts (unchanged) -->
         <article class="card" data-title="Triton X9" data-gpu="RTX 4090" data-cpu="i9" data-ram="64">
-          <div class="thumb" aria-hidden="true">
-            <svg width="120" height="80" viewBox="0 0 160 100" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="148" height="88" rx="10" stroke-opacity="0.04" stroke="#fff" fill="#060606"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="18" fill="#bdb6ad">Triton X9</text></svg>
-          </div>
+          <div class="thumb" aria-hidden="true"><svg width="120" height="80" viewBox="0 0 160 100" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="148" height="88" rx="10" stroke-opacity="0.04" stroke="#fff" fill="#060606"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="18" fill="#bdb6ad">Triton X9</text></svg></div>
           <h4>Triton X9</h4>
-          <div class="specs">
-            <span>CPU: Intel i9-13900K</span>
-            <span>GPU: NVIDIA RTX 4090</span>
-            <span>RAM: 64GB DDR5</span>
-          </div>
+          <div class="specs"><span>CPU: Intel i9-13900K</span><span>GPU: NVIDIA RTX 4090</span><span>RAM: 64GB DDR5</span></div>
           <div class="price">₹3,29,999</div>
         </article>
 
-        <!-- Card 2 -->
         <article class="card" data-title="Apex Nova" data-gpu="RTX 4080" data-cpu="i7" data-ram="32">
           <div class="thumb" aria-hidden="true"><svg width="120" height="80" viewBox="0 0 160 100" fill="none"><rect x="6" y="6" width="148" height="88" rx="10" stroke-opacity="0.04" stroke="#fff" fill="#060606"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="18" fill="#bdb6ad">Apex Nova</text></svg></div>
           <h4>Apex Nova</h4>
@@ -190,7 +261,6 @@
           <div class="price">₹2,19,999</div>
         </article>
 
-        <!-- Card 3 -->
         <article class="card" data-title="Shadow Core" data-gpu="RX 7900 XTX" data-cpu="Ryzen 9" data-ram="64">
           <div class="thumb" aria-hidden="true"><svg width="120" height="80" viewBox="0 0 160 100" fill="none"><rect x="6" y="6" width="148" height="88" rx="10" stroke-opacity="0.04" stroke="#fff" fill="#060606"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="18" fill="#bdb6ad">Shadow Core</text></svg></div>
           <h4>Shadow Core</h4>
@@ -198,7 +268,6 @@
           <div class="price">₹2,79,499</div>
         </article>
 
-        <!-- Card 4 -->
         <article class="card" data-title="Mini Beast M1" data-gpu="RTX 4070" data-cpu="i7" data-ram="32">
           <div class="thumb" aria-hidden="true"><svg width="120" height="80" viewBox="0 0 160 100" fill="none"><rect x="6" y="6" width="148" height="88" rx="10" stroke-opacity="0.04" stroke="#fff" fill="#060606"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="18" fill="#bdb6ad">Mini Beast M1</text></svg></div>
           <h4>Mini Beast M1</h4>
@@ -206,7 +275,6 @@
           <div class="price">₹1,39,999</div>
         </article>
 
-        <!-- Card 5 -->
         <article class="card" data-title="Valor Station" data-gpu="RTX 4060" data-cpu="i5" data-ram="16">
           <div class="thumb" aria-hidden="true"><svg width="120" height="80" viewBox="0 0 160 100" fill="none"><rect x="6" y="6" width="148" height="88" rx="10" stroke-opacity="0.04" stroke="#fff" fill="#060606"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="18" fill="#bdb6ad">Valor Station</text></svg></div>
           <h4>Valor Station</h4>
@@ -214,13 +282,56 @@
           <div class="price">₹79,999</div>
         </article>
 
-        <!-- Card 6 -->
         <article class="card" data-title="Creator Pro" data-gpu="RTX 4080" data-cpu="i9" data-ram="64">
           <div class="thumb" aria-hidden="true"><svg width="120" height="80" viewBox="0 0 160 100" fill="none"><rect x="6" y="6" width="148" height="88" rx="10" stroke-opacity="0.04" stroke="#fff" fill="#060606"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="18" fill="#bdb6ad">Creator Pro</text></svg></div>
           <h4>Creator Pro</h4>
           <div class="specs"><span>CPU: Intel i9-13900KS</span><span>GPU: NVIDIA RTX 4080</span><span>RAM: 64GB DDR5</span></div>
           <div class="price">₹2,59,999</div>
         </article>
+
+        <!-- ====== NEW: Laptop product cards (5 laptops you provided) ====== -->
+
+        <article class="card" data-title="MacBook Air M4" data-gpu="" data-cpu="M4" data-ram="">
+          <div class="thumb" aria-hidden="true"><svg width="120" height="80" viewBox="0 0 160 100"><rect x="6" y="6" width="148" height="88" rx="10" fill="#080808"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="14" fill="#bdb6ad">MacBook Air (M4)</text></svg></div>
+          <h4>Apple MacBook Air 13&quot; (M4, 2025)</h4>
+          <div class="specs"><span>SoC: Apple M4</span><span>Display: 13&quot; Retina</span><span>Storage: SSD (configurable)</span></div>
+          <div class="price">~ ₹55,900–₹75,000</div>
+          <div class="source"><a href="https://timesofindia.indiatimes.com/technology/mobiles-tabs/apple-macbook-air-m4-price-drops-to-rs-55911-in-croma-black-friday-sale-check-bank-discount-and-exchange-offer/articleshow/125619080.cms" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:none">Source</a></div>
+        </article>
+
+        <article class="card" data-title="HP 15-fd0467TU" data-gpu="" data-cpu="Intel i5" data-ram="16">
+          <div class="thumb" aria-hidden="true"><svg width="120" height="80" viewBox="0 0 160 100"><rect x="6" y="6" width="148" height="88" rx="10" fill="#080808"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="14" fill="#bdb6ad">HP 15</text></svg></div>
+          <h4>HP 15-fd0467TU / 15-fd0466TU</h4>
+          <div class="specs"><span>CPU: 13th Gen Intel Core i5</span><span>RAM: 16GB</span><span>Storage: 512GB SSD</span></div>
+          <div class="price">~ ₹54,999–₹59,499</div>
+          <div class="source"><a href="https://www.hp.com/in-en/shop/hp-laptops" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:none">Source</a></div>
+        </article>
+
+        <article class="card" data-title="Lenovo IdeaPad Slim 3" data-gpu="" data-cpu="Intel i7" data-ram="16">
+          <div class="thumb" aria-hidden="true"><svg width="120" height="80" viewBox="0 0 160 100"><rect x="6" y="6" width="148" height="88" rx="10" fill="#080808"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="13" fill="#bdb6ad">IdeaPad Slim 3</text></svg></div>
+          <h4>Lenovo IdeaPad Slim 3 (i7 / 16GB / 512GB)</h4>
+          <div class="specs"><span>CPU: Intel Core i7 (13th Gen)</span><span>RAM: 16GB</span><span>Storage: 512GB SSD</span></div>
+          <div class="price">~ ₹67,990</div>
+          <div class="source"><a href="https://www.smartprix.com/laptops" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:none">Source</a></div>
+        </article>
+
+        <article class="card" data-title="Asus Vivobook 14 S3407CA" data-gpu="" data-cpu="Intel Ultra 7" data-ram="16">
+          <div class="thumb" aria-hidden="true"><svg width="120" height="80" viewBox="0 0 160 100"><rect x="6" y="6" width="148" height="88" rx="10" fill="#080808"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="12" fill="#bdb6ad">Asus Vivobook 14</text></svg></div>
+          <h4>Asus Vivobook 14 S3407CA</h4>
+          <div class="specs"><span>CPU: Intel Core Ultra 7</span><span>RAM: 16GB</span><span>Storage: 512GB SSD</span></div>
+          <div class="price">~ ₹82,990</div>
+          <div class="source"><a href="https://www.smartprix.com/laptops" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:none">Source</a></div>
+        </article>
+
+        <article class="card" data-title="Acer Aspire Lite" data-gpu="" data-cpu="Intel i5" data-ram="16">
+          <div class="thumb" aria-hidden="true"><svg width="120" height="80" viewBox="0 0 160 100"><rect x="6" y="6" width="148" height="88" rx="10" fill="#080808"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="13" fill="#bdb6ad">Acer Aspire Lite</text></svg></div>
+          <h4>Acer Aspire Lite AL15-52H</h4>
+          <div class="specs"><span>CPU: 12th Gen Intel Core i5</span><span>RAM: 16GB</span><span>Storage: 512GB SSD</span></div>
+          <div class="price">~ ₹44,990</div>
+          <div class="source"><a href="https://www.smartprix.com/laptops" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:none">Source</a></div>
+        </article>
+
+        <!-- ====== end added laptops ====== -->
 
       </div>
     </section>
@@ -232,7 +343,7 @@
   </div>
 
   <script>
-    // Filtering script
+    // Filtering script (unchanged)
     (function(){
       const input = document.getElementById('searchInput');
       const btn = document.getElementById('searchBtn');
@@ -243,7 +354,7 @@
         const s = (q||'').trim().toLowerCase();
         if(!s){cards.forEach(c=>c.style.display='flex');return}
         cards.forEach(card=>{
-          const title = card.dataset.title.toLowerCase();
+          const title = (card.dataset.title||'').toLowerCase();
           const cpu = (card.dataset.cpu||'').toLowerCase();
           const gpu = (card.dataset.gpu||'').toLowerCase();
           const ram = (card.dataset.ram||'').toLowerCase();
@@ -258,7 +369,42 @@
         else filter(input.value);
       });
 
+      // Dropdown: mobile click toggle and accessible behavior
+      const dropdown = document.getElementById('productsDropdown');
+      const toggle = document.getElementById('productsToggle');
+
+      // Toggle on click for touch devices; desktop hover still works via CSS
+      toggle.addEventListener('click', function(e){
+        // allow normal navigation to products.html on normal click:
+        // if the user intentionally wants to open the dropdown instead (short tap), prevent navigation
+        // We'll prevent default only for small screens; on larger screens keep it navigational.
+        if(window.innerWidth <= 800){
+          e.preventDefault();
+          dropdown.classList.toggle('open');
+          // set aria-expanded
+          const expanded = dropdown.classList.contains('open');
+          toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        }
+      });
+
+      // close dropdown when clicking outside (mobile)
+      document.addEventListener('click', function(e){
+        if(!dropdown.contains(e.target)) {
+          dropdown.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // close dropdown on ESC
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape') {
+          dropdown.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
     })();
   </script>
 </body>
 </html>
+

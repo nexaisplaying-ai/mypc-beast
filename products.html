@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MyPC Beast — Products</title>
+  <meta name="description" content="Featured laptops — curated for students and professionals. Tech-Luxe black & gold theme." />
+  <style>
+    /* Tech-Luxe theme: black + gold */
+    :root{
+      --bg:#050505; --card:#0b0b0b; --muted:#bfb8ad; --gold:#ffd700; --glass:rgba(255,215,0,0.06);
+      --pad:18px; --radius:12px; --maxw:1200px;
+    }
+    html,body{height:100%;}
+    body{margin:0; font-family:Inter,system-ui,Segoe UI,Arial; background:var(--bg); color:#eee; -webkit-font-smoothing:antialiased}
+    .container{max-width:var(--maxw); margin:36px auto; padding:20px}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#111,#2a2a2a);display:flex;align-items:center;justify-content:center;color:var(--gold);font-weight:800}
+    h1{margin:0;color:var(--gold)}
+
+    /* grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:22px}
+    .card{background:linear-gradient(180deg,var(--card),#070707);border:1px solid var(--glass);padding:var(--pad);border-radius:var(--radius);box-shadow:0 8px 30px rgba(0,0,0,0.6);display:flex;flex-direction:column;gap:10px}
+    .title{color:var(--gold);font-weight:700;font-size:1rem}
+    .price{font-weight:700}
+    .desc{color:var(--muted);font-size:0.94rem;line-height:1.38}
+    .meta{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .sources{font-size:0.82rem;color:#c9b98f}
+    .actions{display:flex;gap:8px}
+    .btn{background:transparent;border:1px solid rgba(255,215,0,0.12);padding:8px 10px;border-radius:8px;color:var(--gold);text-decoration:none;font-weight:600}
+    .btn.secondary{color:#ddd;border-color:rgba(255,255,255,0.06)}
+
+    /* responsive table fallback */
+    .table-wrap{margin-top:22px;overflow:auto}
+    table{width:100%;border-collapse:collapse;color:#eaeaea}
+    th,td{padding:12px;border-bottom:1px solid rgba(255,255,255,0.04);text-align:left}
+    thead th{color:var(--gold)}
+
+    footer{margin-top:26px;color:var(--muted);font-size:0.9rem}
+
+    /* small screens */
+    @media (max-width:480px){
+      .brand h1{font-size:18px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">MB</div>
+        <div>
+          <h1>MyPC Beast</h1>
+          <div style="color:var(--muted);font-size:0.9rem">Curated laptops — Tech‑Luxe picks</div>
+        </div>
+      </div>
+      <nav aria-label="Main nav">
+        <a href="/mypc-beast/" class="btn secondary" style="text-decoration:none">Home</a>
+        <a href="#products" class="btn" style="text-decoration:none">Products</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="products">
+        <h2 style="margin-top:18px;color:var(--gold)">Featured Laptops</h2>
+        <p style="color:var(--muted)">Click "Source" to view price or product page. This page is data‑driven — update the JS array below to add/remove items.</p>
+
+        <!-- Grid for product cards -->
+        <div id="grid" class="grid" role="list" aria-label="Product listings"></div>
+
+        <!-- Fallback table (optional) -->
+        <div class="table-wrap">
+          <table aria-hidden="true">
+            <thead>
+              <tr><th>Laptop (Model)</th><th>Approx. Price (INR)</th><th>Key Specifications / Strengths</th></tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <footer>
+        <div>Sources: Times of India, TechRadar, HP, Smartprix. Prices approximate and may change.</div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Product data: update this array to change products -->
+  <script>
+    const products = [
+      {
+        model: "Apple MacBook Air 13-inch (M4, 2025)",
+        price: "~ ₹55,900–₹75,000",
+        desc: "Apple M4 chip — excellent for speed & multitasking, premium build quality, very portable, long battery life. Ideal for writing reports, data analysis, presentations, and long-term durability.",
+        src: "https://timesofindia.indiatimes.com/technology/mobiles-tabs/apple-macbook-air-m4-price-drops-to-rs-55911-in-croma-black-friday-sale-check-bank-discount-and-exchange-offer/articleshow/125619080.cms"
+      },
+      {
+        model: "HP Laptop 15-fd0467TU / 15-fd0466TU (13th Gen Intel Core i5)",
+        price: "~ ₹54,999–₹59,499",
+        desc: "Windows 11, 15.6″ FHD display, 16 GB RAM + 512 GB SSD — good all-rounder for MS Office, data analysis, multitasking, and everyday work without overspending.",
+        src: "https://www.hp.com/in-en/shop/hp-laptops"
+      },
+      {
+        model: "Lenovo IdeaPad Slim 3 (2025) — i7 / 16 GB / 512 GB SSD",
+        price: "~ ₹67,990",
+        desc: "Strong mid-range CPU (13th Gen Intel Core i7), ample RAM & SSD — solid for heavy Excel sheets, multiple apps, research work, and multitasking.",
+        src: "https://www.smartprix.com/laptops"
+      },
+      {
+        model: "Asus Vivobook 14 S3407CA (Intel Core Ultra 7 / 16 GB / 512 GB SSD)",
+        price: "~ ₹82,990",
+        desc: "Compact form factor + strong CPU + SSD — good for portability + power; suitable if you travel or move campuses often.",
+        src: "https://www.smartprix.com/laptops"
+      },
+      {
+        model: "Acer Aspire Lite AL15-52H (12th Gen Intel Core i5 / 16 GB / 512 GB SSD)",
+        price: "~ ₹44,990",
+        desc: "Budget-friendly but capable: enough for assignments, web research, online classes, Excel/Word work.",
+        src: "https://www.smartprix.com/laptops"
+      }
+    ];
+
+    const grid = document.getElementById('grid');
+    const tableBody = document.getElementById('tableBody');
+
+    products.forEach(p=>{
+      // card
+      const card = document.createElement('article');
+      card.className='card';
+      card.setAttribute('role','listitem');
+      card.innerHTML = `
+        <div class="title">${p.model}</div>
+        <div class="price">${p.price}</div>
+        <div class="desc">${p.desc}</div>
+        <div class="meta">
+          <div class="sources">Source</div>
+          <div class="actions">
+            <a class="btn" href="${p.src}" target="_blank" rel="noopener">View Source</a>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+
+      // table row (fallback)
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${p.model}</td><td>${p.price}</td><td>${p.desc}</td>`;
+      tableBody.appendChild(tr);
+    });
+  </script>
+</body>
+</html>
